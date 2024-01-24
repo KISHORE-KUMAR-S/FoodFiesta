@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals_app/widgets/tabs.dart';
 
 void main() {
   runApp(
-    const MainApp(),
+    const ProviderScope(child: MainApp()),
   );
 }
 
