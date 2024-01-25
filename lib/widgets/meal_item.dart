@@ -33,9 +33,12 @@ class MealItem extends StatelessWidget {
         onTap: () => onSelectMeal(context, mealModel), // Corrected here
         child: Stack(
           children: [
-            FadeInImage(
-              placeholder: MemoryImage(kTransparentImage),
-              image: NetworkImage(mealModel.imageUrl),
+            Hero(
+              tag: mealModel.id,
+              child: FadeInImage(
+                placeholder: MemoryImage(kTransparentImage),
+                image: NetworkImage(mealModel.imageUrl),
+              ),
             ),
             Positioned(
               bottom: 0,
