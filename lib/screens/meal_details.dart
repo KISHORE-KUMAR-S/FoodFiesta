@@ -1,21 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals_app/models/meal_model.dart';
+import 'package:meals_app/providers/favourites_provider.dart';
 
-class MealDetailsScreen extends StatelessWidget {
-  const MealDetailsScreen(
-      {super.key, required this.mealModel, required this.onToggleFavourite});
+class MealDetailsScreen extends ConsumerWidget {
+  const MealDetailsScreen({
+    super.key,
+    required this.mealModel,
+    // required this.onToggleFavourite,
+  });
 
   final MealModel mealModel;
-  final void Function(MealModel mealModel) onToggleFavourite;
+  // final void Function(MealModel mealModel) onToggleFavourite;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(mealModel.title),
         actions: [
           IconButton(
-            onPressed: () => onToggleFavourite(mealModel),
+            // onPressed: () => onToggleFavourite(mealModel),
+            onPressed: () {
+              final wasAdded = ref
+                  .read(favouriteMealsProvider.notifier)
+                  .toggleMealFavouriteStatus(
+                      mealModel); //inside function we shouldn't use ref.watch()
+
+              // void _showInfoMessage(String message) {
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(wasAdded
+                      ? "Added to Favourites"
+                      : "Removed from Favourites"),
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+              // }
+            },
             icon: const Icon(Icons.star_border_outlined),
           )
         ],
