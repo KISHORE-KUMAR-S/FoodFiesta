@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.4.9
+  google_fonts: ^6.1.0
   material: ^1.0.0+2
   riverpod_annotation: ^2.3.3
   transparent_image: ^2.0.1
