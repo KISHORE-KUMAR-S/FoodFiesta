@@ -7,11 +7,9 @@ class MealDetailsScreen extends ConsumerWidget {
   const MealDetailsScreen({
     super.key,
     required this.mealModel,
-    // required this.onToggleFavourite,
   });
 
   final MealModel mealModel;
-  // final void Function(MealModel mealModel) onToggleFavourite;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,14 +22,12 @@ class MealDetailsScreen extends ConsumerWidget {
         title: Text(mealModel.title),
         actions: [
           IconButton(
-            // onPressed: () => onToggleFavourite(mealModel),
             onPressed: () {
               final wasAdded = ref
                   .read(favouriteMealsProvider.notifier)
                   .toggleMealFavouriteStatus(
                       mealModel); //inside function we shouldn't use ref.watch()
 
-              // void _showInfoMessage(String message) {
               ScaffoldMessenger.of(context).clearSnackBars();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -41,7 +37,6 @@ class MealDetailsScreen extends ConsumerWidget {
                   duration: const Duration(seconds: 2),
                 ),
               );
-              // }
             },
             icon: Icon(favourite ? Icons.star : Icons.star_border_outlined),
           )
